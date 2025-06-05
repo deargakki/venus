@@ -2,3 +2,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest', '.' ]
+images:
+  - 'us-east1-docker.pkg.dev/PROJECT_ID/venusapp/venusapp:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
