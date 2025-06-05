@@ -18,11 +18,7 @@ images:
   args: [
     'run', 
     'deploy', 
-    'venusapp-service',  # Cloud Run 服务名称
+    'venusapp-service',
     '--image', 'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest',
-    '--region', 'us-central1',
-    '--platform', 'managed', 
-    '--allow-unauthenticated',  
-    '--memory', '512Mi', 
-    '--timeout', '300s'  
+    '--region', 'us-central1'
   ]
