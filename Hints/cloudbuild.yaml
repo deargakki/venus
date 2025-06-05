@@ -4,3 +4,25 @@ steps:
   args: [ 'build', '-t', 'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest', '.' ]
 images:
 - 'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest'
+
+# 2. 推送镜像到 Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push', 
+    'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest'
+  ]
+  
+  # 3. 部署到 Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args: [
+    'run', 
+    'deploy', 
+    'venusapp-service',  # Cloud Run 服务名称
+    '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/venusapp/venusapp:latest',
+    '--region', 'us-central1',  # 部署区域，与 Artifact Registry 保持一致
+    '--platform', 'managed',  # 使用托管的 Cloud Run
+    '--allow-unauthenticated',  # 允许公开访问，按需调整
+    '--memory', '512Mi',  # 内存分配，按需调整
+    '--timeout', '300s'  # 请求超时时间，按需调整
+  ]
