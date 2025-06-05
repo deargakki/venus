@@ -23,3 +23,7 @@ steps:
 
 images:
 - 'us-central1-docker.pkg.dev/roimb-2025-appuser19/venusapp/venusapp:latest'
+
+
+options:
+  logging: 'CLOUD_LOGGING_ONLY'  
